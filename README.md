@@ -37,9 +37,8 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 
 <h3 tabindex="-1" class="heading-element" dir="auto">4. Building Finetuning Dataset</h3>
 
-<p>The dataset must be saved as <em>filename.json</em> in <em>finetuning/static</em> and its content/dialog must have the following format:</p>
-<code>
-[
+<p>The dataset must be saved as <em>filename.json</em> in <em>finetuning/static</em> and its content/dialog MUST have the following format:</p>
+<code>[
     {
         "instruction": "Description of the character",
         "input": "User/player input",

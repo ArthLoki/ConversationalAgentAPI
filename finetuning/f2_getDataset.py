@@ -15,11 +15,6 @@ def getPromptFormat():
 def formatting_prompts_func(jsonFilename):
 
     prompt = getPromptFormat()
-    # instructions = jsonFilename.get("input", [])
-    # outputs = jsonFilename.get("output", [])
-
-    # if instructions is None or outputs is None:
-    #     return { "text": [] }  # Return an empty list if missing data
 
     instructions = jsonFilename["input"]
     outputs = jsonFilename["output"]
