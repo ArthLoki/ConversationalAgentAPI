@@ -1,7 +1,11 @@
 from datasets import load_dataset
 import json
 
+from f1_getModel import getBaseModelAndTokenizer
+
+_, tokenizer = getBaseModelAndTokenizer()
 EOS_TOKEN = tokenizer.eos_token # Must add EOS_TOKEN
+dataset_loc = "static/"
 
 
 def getPromptFormat():
@@ -11,10 +15,14 @@ def getPromptFormat():
 def formatting_prompts_func(jsonFilename):
 
     prompt = getPromptFormat()
+    # instructions = jsonFilename.get("input", [])
+    # outputs = jsonFilename.get("output", [])
+
+    # if instructions is None or outputs is None:
+    #     return { "text": [] }  # Return an empty list if missing data
 
     instructions = jsonFilename["input"]
-    #inputs       = jsonFilename["input"]
-    outputs      = jsonFilename["output"]
+    outputs = jsonFilename["output"]
     texts = []
     for instruction, output in zip(instructions, outputs):
         # Must add EOS_TOKEN, otherwise your generation will go on forever!
@@ -24,7 +32,6 @@ def formatting_prompts_func(jsonFilename):
 
 
 def loadCustomizedDataset(datasetJsonFilename):
-    dataset = load_dataset("json", data_files=datasetJsonFilename, split = "train")
+    dataset = load_dataset("json", data_files=f"{dataset_loc}/{datasetJsonFilename}.json", split="train")
     dataset = dataset.map(formatting_prompts_func, batched = True,)
-    print(dataset.column_names)
-    return
+    return dataset

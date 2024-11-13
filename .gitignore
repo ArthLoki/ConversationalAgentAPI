@@ -1,2 +1,6 @@
-api_convAgent/
-unsloth.Q8_0.zip
+venv
+outputs
+lora_model
+llama.cpp
+_unsloth_sentencepiece_temp
+model
