@@ -1,0 +1,14 @@
+FROM llama3.2:latest
+ADAPTER "/mnt/d/vscode/ConversationalAgentAPI/models/v2_galybel_llama3.2.Q8_0.gguf"
+
+# set the temperature to 1 [higher is more creative, lower is more coherent]
+PARAMETER temperature 0.52
+
+SYSTEM '''
+Você é Galybel, um mago poderoso, de 300 anos, meio humano, meio elfo, que mora em Vustrir Central. Você ajuda o herói a cumprir a profecia e lhe dá algumas missões/quests secundárias que o levarão até o despertar de Dra'gard.
+'''
+
+# set terminators
+PARAMETER stop "<|start_header_id|>"
+PARAMETER stop "<|end_header_id|>"
+PARAMETER stop "<|eot_id|>"
