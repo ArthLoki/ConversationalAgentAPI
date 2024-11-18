@@ -30,6 +30,9 @@ SOMETHING
 Install pytorch using the following command:
 <code>pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121</code>
 
+Install ollama using the following command (in linux -> base directory):
+<code>curl -fsSL https://ollama.com/install.sh | sh</code>
+
 Install dependencies using the file <em>requirements.txt</em>:
 <code>pip install -r requirements.txt</code>
 

@@ -12,17 +12,17 @@ def getMaxSeqLength():
 
 def getBaseModelAndTokenizer():
     # 4bit pre quantized models we support for 4x faster downloading + no OOMs.
-    fourbit_models = [
-        "unsloth/mistral-7b-v0.3-bnb-4bit",      # New Mistral v3 2x faster!
-        "unsloth/mistral-7b-instruct-v0.3-bnb-4bit",
-        "unsloth/llama-3-8b-bnb-4bit",           # Llama-3 15 trillion tokens model 2x faster!
-        "unsloth/llama-3-8b-Instruct-bnb-4bit",
-        "unsloth/llama-3-70b-bnb-4bit",
-        "unsloth/Phi-3-mini-4k-instruct",        # Phi-3 2x faster!
-        "unsloth/Phi-3-medium-4k-instruct",
-        "unsloth/mistral-7b-bnb-4bit",
-        "unsloth/gemma-7b-bnb-4bit",             # Gemma 2.2x faster!
-    ] # More models at https://huggingface.co/unsloth
+    # fourbit_models = [
+    #     "unsloth/mistral-7b-v0.3-bnb-4bit",      # New Mistral v3 2x faster!
+    #     "unsloth/mistral-7b-instruct-v0.3-bnb-4bit",
+    #     "unsloth/llama-3-8b-bnb-4bit",           # Llama-3 15 trillion tokens model 2x faster!
+    #     "unsloth/llama-3-8b-Instruct-bnb-4bit",
+    #     "unsloth/llama-3-70b-bnb-4bit",
+    #     "unsloth/Phi-3-mini-4k-instruct",        # Phi-3 2x faster!
+    #     "unsloth/Phi-3-medium-4k-instruct",
+    #     "unsloth/mistral-7b-bnb-4bit",
+    #     "unsloth/gemma-7b-bnb-4bit",             # Gemma 2.2x faster!
+    # ] # More models at https://huggingface.co/unsloth
 
     model, tokenizer = FastLanguageModel.from_pretrained(
         model_name = "unsloth/Llama-3.2-3B-Instruct",

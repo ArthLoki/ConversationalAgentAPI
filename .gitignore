@@ -1,6 +1,9 @@
 venv
 outputs
 lora_model
+llama-stack
 llama.cpp
 _unsloth_sentencepiece_temp
 model
+models
+__pycache__

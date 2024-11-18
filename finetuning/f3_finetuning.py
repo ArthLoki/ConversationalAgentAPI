@@ -1,7 +1,9 @@
 from trl import SFTTrainer
 from transformers import TrainingArguments, TextStreamer
-from unsloth import is_bfloat16_supported
+from unsloth import is_bfloat16_supported, FastLanguageModel
 import torch
+
+
 
 from f1_getModel import getBaseModelAndTokenizer, getMaxSeqLength
 from f2_getDataset import loadCustomizedDataset, getPromptFormat
@@ -64,7 +66,7 @@ def train(model, tokenizer, dataset):
         return False
 
 
-def inference(prompt: str, instruction: str):
+def inference(model, instruction: str):
     FastLanguageModel.for_inference(model) # Enable native 2x faster inference
     inputs = tokenizer(
     [

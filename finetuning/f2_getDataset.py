@@ -2,10 +2,10 @@ from datasets import load_dataset
 import json
 
 from f1_getModel import getBaseModelAndTokenizer
+from configs import static_path
 
 _, tokenizer = getBaseModelAndTokenizer()
 EOS_TOKEN = tokenizer.eos_token # Must add EOS_TOKEN
-dataset_loc = "static/"
 
 
 def getPromptFormat():
@@ -27,6 +27,6 @@ def formatting_prompts_func(jsonFilename):
 
 
 def loadCustomizedDataset(datasetJsonFilename):
-    dataset = load_dataset("json", data_files=f"{dataset_loc}/{datasetJsonFilename}.json", split="train")
+    dataset = load_dataset("json", data_files=f"{static_path}/{datasetJsonFilename}.json", split="train")
     dataset = dataset.map(formatting_prompts_func, batched = True,)
     return dataset
