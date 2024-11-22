@@ -4,16 +4,16 @@ from configs import gguf_models
 from a2_create_ollama_model import create_ollama_model
 from abort_process import aborting_process
 
-def runNewModel(model_image: str):
+def runNewModel(model_image: str, content: str):
     try:
-        # messages = [
-        #     { "role": "user", "content": content }
-        # ]
-        # modelMessages = {"model": model_image, "messages": messages}
-        # subprocess.Popen(["curl", "http://localhost:11434/api/chat", "-d", f"'{messages}'"])
+        messages = [
+            { "role": "user", "content": content }
+        ]
+        modelMessages = {"model": model_image, "messages": messages}
+        subprocess.Popen(["curl", "http://localhost:11434/api/chat", "-d", f"'{modelMessages}'"])
         # os.system("""curl http://localhost:11434/api/chat -d '{ "model": {}, "messages": {} }'""".format(model_image, messages))
 
-        subprocess.Popen(["ollama", "run", model_image])
+        # subprocess.Popen(["ollama", "run", model_image])
     except Exception as err:
         print(f"\nAn error ocurred while running new model: {err}")
         exit(1)
@@ -33,7 +33,8 @@ def main():
         exit(1)
 
     print("\n\n>>> Step 3: Test the new model")
-    runNewModel(model_image)
+    message_content = input("\nEnter a message content: ")
+    runNewModel(model_image, message_content)
     return 0
 
 
