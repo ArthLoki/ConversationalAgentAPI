@@ -7,3 +7,4 @@ _unsloth_sentencepiece_temp
 model
 models
 __pycache__
+.pyc
