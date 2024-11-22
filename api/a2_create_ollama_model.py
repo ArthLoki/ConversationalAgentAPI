@@ -1,6 +1,6 @@
 import os
 import subprocess
-from configs import modelfile_path, root_path
+from configs import modelfile_path
 from a1_create_ollama_modelfile import load_ollama, create_modelfile
 from abort_process import aborting_process
 
