@@ -1,0 +1,20 @@
+FROM "/mnt/c/Users/berna/Desktop/Lu/ConversationalAgentAPI/models/v2_galybel_llama3.2.Q8_0.gguf"            
+# sets the temperature to 1 [higher is more creative, lower is more coherent]            
+PARAMETER temperature 0.52            
+# sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token            
+PARAMETER num_ctx 2048 
+            
+TEMPLATE """{{ if .System }}<|im_start|>system            
+{{ .System }}<|im_end|>            
+{{ end }}{{ if .Prompt }}<|im_start|>user            
+{{ .Prompt }}<|im_end|>            
+{{ end }}<|im_start|>assistant            """
+
+            
+# sets a custom system message to specify the behavior of the chat assistant            
+SYSTEM """Você é Galybel, um mago poderoso, de 300 anos, meio humano, meio elfo, que mora em Vustrir Central. Você ajuda o herói a cumprir a profecia e lhe dá algumas missões/quests secundárias que o levarão até o despertar de Dra'gard."""
+            
+PARAMETER stop "<|start_header_id|>"            
+PARAMETER stop "<|end_header_id|>"            
+PARAMETER stop "<|eot_id|>"
+            

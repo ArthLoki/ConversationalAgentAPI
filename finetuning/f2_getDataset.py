@@ -9,7 +9,7 @@ EOS_TOKEN = tokenizer.eos_token # Must add EOS_TOKEN
 
 
 def getPromptFormat():
-    return "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{}\n\n### Response:\n{}"
+    return "{}"
 
 
 def formatting_prompts_func(jsonFilename):
@@ -21,7 +21,7 @@ def formatting_prompts_func(jsonFilename):
     texts = []
     for instruction, output in zip(instructions, outputs):
         # Must add EOS_TOKEN, otherwise your generation will go on forever!
-        text = prompt.format(instruction, output) + EOS_TOKEN
+        text = prompt.format(output) + EOS_TOKEN
         texts.append(text)
     return { "text" : texts, }
 
