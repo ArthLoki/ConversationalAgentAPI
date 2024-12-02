@@ -16,8 +16,3 @@ unsloth-zoo
 # xformers==0.0.27
 # Otherwise, use the latest compatible xformers version:
 xformers
-
-### API
-flask
-
-### CrewAI
