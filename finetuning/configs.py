@@ -21,6 +21,13 @@ static_path = f"{root_path}/finetuning/static"
 model_path = f"{root_path}/models"
 modelfile_path = f"{root_path}/modelfiles"
 
+# Create folders if they don't exist
+if not os.path.exists(static_path):
+    os.mkdir(static_path)
+
+if not os.path.exists(model_path):
+    os.mkdir(model_path)
+
 
 # Set model and dataset variables
 model_id = "meta-llama/Meta-Llama-3.2-3B-Instruct"

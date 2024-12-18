@@ -10,6 +10,7 @@ bitsandbytes
 triton
 transformers
 unsloth-zoo
+cmake
 
 # Conditional dependency for xformers based on Torch version:
 # If using torch < 2.4, manually install xformers==0.0.27:

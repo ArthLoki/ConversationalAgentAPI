@@ -17,4 +17,5 @@ SYSTEM """Você é Galybel, um mago poderoso, de 300 anos, meio humano, meio elf
 PARAMETER stop "<|start_header_id|>"            
 PARAMETER stop "<|end_header_id|>"            
 PARAMETER stop "<|eot_id|>"
+PARAMETER stop "<|im_end|>"
             

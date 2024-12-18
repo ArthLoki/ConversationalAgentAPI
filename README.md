@@ -10,7 +10,7 @@ SOMETHING
 
 <h3 tabindex="-1" class="heading-element" dir="auto">2. Create a Virtual Environment</h3>
 
-<p>Before installing all dependencies, I suggest you to create a python virtual environment in WSL (I'm using Ubuntu).</p>
+<p>Before installing all dependencies, I suggest you to create a python virtual environment in WSL (I'm using Ubuntu) for each process.</p>
 
 <p>
 <strong>Step 1: </strong>Run the command for the python version you're using:
@@ -55,3 +55,11 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 
 <p>Use the <code>cd</code> command to reach the directory <em>finetuning</em> which contains the files to perform the finetuning, then run the command below:</p>
 <code>python f5_main.py</code>
+
+<h3 tabindex="-1" class="heading-element" dir="auto">6. Create Ollama API</h3>
+
+<p>Use the <code>cd</code> command to reach the directory <em>api</em> which contains the files to perform the creation of the Ollama API, then run the command below following the instructions given in execution:</p>
+<code>python a3_main.py</code>
+<p></p>
+<p>Once the code runs smoothly, run in terminal:</p>
+<code>ollama run chosen_modelname</code>

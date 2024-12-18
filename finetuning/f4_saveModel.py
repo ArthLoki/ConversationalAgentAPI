@@ -9,7 +9,7 @@ def save_lora_model(model, tokenizer):
 def save_model():
     try:
         model, tokenizer = getBaseModelAndTokenizer()
-        save_lora_model(model, tokenizer)
+        # save_lora_model(model, tokenizer)
         model.save_pretrained_gguf("model", tokenizer,)
         return True
     except Exception as err:

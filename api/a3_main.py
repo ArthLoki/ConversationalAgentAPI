@@ -32,9 +32,9 @@ def main():
         print("\nAn error occured. Try again later.")
         exit(1)
 
-    print("\n\n>>> Step 3: Test the new model")
-    message_content = input("\nEnter a message content: ")
-    runNewModel(model_image, message_content)
+    # print("\n\n>>> Step 3: Test the new model")
+    # message_content = input("\nEnter a message content: ")
+    # runNewModel(model_image, message_content)
     return 0
 
 
