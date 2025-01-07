@@ -1,0 +1,19 @@
+### Finetuning
+# Install torch, torchvision, and torchaudio separately with the specified index URL:
+# pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+unsloth @ git+https://github.com/unslothai/unsloth.git
+trl
+peft
+accelerate
+bitsandbytes
+triton
+transformers
+unsloth-zoo
+cmake
+
+# Conditional dependency for xformers based on Torch version:
+# If using torch < 2.4, manually install xformers==0.0.27:
+# xformers==0.0.27
+# Otherwise, use the latest compatible xformers version:
+xformers
