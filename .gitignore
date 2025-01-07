@@ -1,10 +1,2 @@
-venv
-outputs
-lora_model
-llama-stack
-llama.cpp
-_unsloth_sentencepiece_temp
-model
-models
-__pycache__
-.pyc
+api_convAgent/
+unsloth.Q8_0.zip
