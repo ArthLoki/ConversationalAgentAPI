@@ -63,3 +63,11 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 <p></p>
 <p>Once the code runs smoothly, run in terminal:</p>
 <code>ollama run chosen_modelname</code>
+
+<h3 tabindex="-1" class="heading-element" dir="auto">7. Run Ollama API</h3>
+<p>Use the <code>cd</code> command to reach the directory <em>finetuning</em> which contains the files to perform the finetuning, then run the commands below in order:</p>
+<code>curl -fsSL https://elastic.co/start-local | sh</code>
+
+<p>Remember to update the environment variables in .env, using the ones given by the command above.<p>
+
+<code>python ra4_main.py</code>

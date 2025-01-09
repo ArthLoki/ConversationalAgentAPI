@@ -8,3 +8,4 @@ model
 models
 __pycache__
 *.pyc
+elastic-start-local
