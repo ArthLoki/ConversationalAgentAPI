@@ -58,7 +58,7 @@ def train(model, tokenizer, dataset):
     try:
         print("\n>>> TRAINING")
         print("Starting Training...")
-        trainer_stats = trainer.train()
+        trainer.train()
         print("Training finished...")
         return True
     except Exception as err:
@@ -66,7 +66,7 @@ def train(model, tokenizer, dataset):
         return False
 
 
-def inference(model, instruction: str):
+def inference(model, tokenizer, instruction: str):
     FastLanguageModel.for_inference(model) # Enable native 2x faster inference
     inputs = tokenizer(
     [

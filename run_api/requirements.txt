@@ -1,0 +1,17 @@
+## Ollama API
+requests
+
+## Docker
+# Reference: https://docs.docker.com/engine/install/ubuntu/
+
+## ElasticSearch
+
+# curl -fsSL https://elastic.co/start-local | sh
+
+# If it's permission error:
+# 1. Run: sudo usermod -aG docker $USER
+# 2. Close terminal and reopen
+# 3. Run sudo curl -fsSL https://elastic.co/start-local | sh
+
+elasticsearch
+python-dotenv
