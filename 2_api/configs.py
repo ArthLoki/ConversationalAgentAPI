@@ -17,16 +17,12 @@ current_directory = os.path.dirname(current_path)
 
 
 # Set path variables
-static_path = f"{root_path}/finetuning/static"
+static_path = f"{root_path}/1_finetuning/static"
 model_path = f"{root_path}/models"
 modelfile_path = f"{root_path}/modelfiles"
 
-# Create folders if they don't exist
-if not os.path.exists(static_path):
-    os.mkdir(static_path)
-
-if not os.path.exists(model_path):
-    os.mkdir(model_path)
+if not os.path.exists(modelfile_path):
+    os.mkdir(modelfile_path)
 
 
 # Set model and dataset variables
