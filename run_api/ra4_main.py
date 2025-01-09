@@ -22,7 +22,7 @@ def mainOllamaAPI(index_name):
         return (character_name, prompt, resResponse)
     except Exception as e:
         print(f"\nError while running main ollama api: {e}")
-        exit(0)
+        aborting_process()
 
 
 def mainElasticIndex(index_name, character_name, prompt, resResponse):
@@ -45,6 +45,7 @@ def mainElasticIndex(index_name, character_name, prompt, resResponse):
             print("Index updated successfully!\n")
     except Exception as e:
         print(f"\nError while running main elastic index: {e}")
+        aborting_process()
 
 
 def main():
@@ -57,5 +58,39 @@ def main():
     mainElasticIndex(index_name, character_name, prompt, resResponse)
 
 
+def chatbot():
+    index_name = input("\nEnter an index name to identify conversation: ").lower()
+    model, character_name = chose_model()
+    print(f"\n\n---------- {character_name} Chatbot ----------")
+
+    while True:
+        # Running Ollama Model Using API
+        prompt = input("\nUser: ")
+        if prompt == "x":
+            print('\nYou chose to exit.\n')
+            break
+
+        resResponse = run_ollama_model(es, model, prompt, index_name)
+        if resResponse is None:
+            aborting_process()
+        print(f"\n{character_name}: {resResponse}")
+
+        # ElasticSearch to create historic messages of each conversation
+        if not es.indices.exists(index=index_name):
+            create_index_elastic(es, index_name, character_name, prompt, resResponse)
+            es.indices.refresh(index=index_name)
+        else:
+            query = {"index_name": index_name} # "index_name": index_name, "character": character_name
+            resSearch = es.search(index=index_name, query={"match": query})
+            if not resSearch:
+                aborting_process()
+
+            resUpdate = add_index_elastic(es, index_name, character_name, query, prompt, resResponse)
+            es.indices.refresh(index=index_name)
+            if not resUpdate:
+                aborting_process()
+
+
 if __name__ == "__main__":
-    main()
+    # main()
+    chatbot()

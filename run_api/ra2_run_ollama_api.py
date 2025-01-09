@@ -4,7 +4,7 @@ from ra3_create_elastic_index import get_previous_messages_from_index_data
 from abort_process import aborting_process
 
 def list_models():
-    return {'1': {"model": "galybel", "character": "Galybel"}, '2': {"model": "idris", "character": "Idris Dawnlight"}}
+    return {'01': {"model": "galybel", "character": "Galybel"}, '02': {"model": "idris", "character": "Idris Dawnlight"}}
 
 
 def chose_model():
@@ -13,7 +13,7 @@ def chose_model():
 
             print(f"\n=====================\n")
             for key, value in models_available.items():
-                print(f"{key}: Model: {value.get('model')}\n\tCharacter: {value.get('character')}")
+                print(f"{key}: Model: {value.get('model')}\n    Character: {value.get('character')}")
             print(f"\n=====================\n")
 
             model_key = input("Choose a model to run (only the numeric value): ")
