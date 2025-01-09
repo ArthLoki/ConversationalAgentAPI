@@ -1,5 +1,4 @@
 from datasets import load_dataset
-import json
 
 from f1_getModel import getBaseModelAndTokenizer
 from configs import static_path
