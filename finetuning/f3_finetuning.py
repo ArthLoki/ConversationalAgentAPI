@@ -1,6 +1,6 @@
 from trl import SFTTrainer
-from transformers import TrainingArguments, TextStreamer
-from unsloth import is_bfloat16_supported, FastLanguageModel
+from transformers import TrainingArguments  #, TextStreamer
+from unsloth import is_bfloat16_supported  #, FastLanguageModel
 import torch
 
 
@@ -66,20 +66,20 @@ def train(model, tokenizer, dataset):
         return False
 
 
-def inference(model, tokenizer, instruction: str):
-    FastLanguageModel.for_inference(model) # Enable native 2x faster inference
-    inputs = tokenizer(
-    [
-        prompt.format(
-            instruction, # instruction
-            "", # input
-            "", # output - leave this blank for generation!
-        )
-    ], return_tensors = "pt").to("cuda")
+# def inference(model, tokenizer, instruction: str):
+#     FastLanguageModel.for_inference(model) # Enable native 2x faster inference
+#     inputs = tokenizer(
+#     [
+#         prompt.format(
+#             instruction, # instruction
+#             "", # input
+#             "", # output - leave this blank for generation!
+#         )
+#     ], return_tensors = "pt").to("cuda")
 
-    text_streamer = TextStreamer(tokenizer)
-    _ = model.generate(**inputs, streamer = text_streamer, max_new_tokens = 128)
-    return True
+#     text_streamer = TextStreamer(tokenizer)
+#     _ = model.generate(**inputs, streamer = text_streamer, max_new_tokens = 128)
+#     return True
 
 
 def finetuning(datasetJSONFilename):

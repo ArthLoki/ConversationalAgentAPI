@@ -21,7 +21,7 @@ def runNewModel(model_image: str, content: str):
 def main():
     print("\n>>> Step 1: Create a Modelfile by answering a few questions")
     modelfile_name = input("\nChoose a name for the modelfile: ")
-    print(f"\n-----------------\nOLLAMA MODELS VALID MODELS:\n{"\n".join(gguf_models)}\n-----------------\n")
+    print("\n-----------------\nOLLAMA MODELS VALID MODELS:\n{}\n-----------------\n".format("\n".join(gguf_models)))
     modelname = input("\nEnter a valid model name: ")
     system_content = input("\nEnter a custom system content: ")
 

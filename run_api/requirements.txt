@@ -2,7 +2,8 @@
 requests
 
 ## Docker
-# Reference: https://docs.docker.com/engine/install/ubuntu/
+# Reference: https://medium.com/@habbema/guia-de-instalação-do-docker-no-wsl-2-com-ubuntu-22-04-9ceabe4d79e8
+# https://docs.docker.com/desktop/setup/install/linux/ubuntu/
 
 ## ElasticSearch
 

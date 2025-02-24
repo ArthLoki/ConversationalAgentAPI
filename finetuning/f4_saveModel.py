@@ -1,9 +1,9 @@
 from f1_getModel import getBaseModelAndTokenizer
 
 
-def save_lora_model(model, tokenizer):
-    model.save_pretrained("lora_model") # Local saving
-    tokenizer.save_pretrained("lora_model")
+# def save_lora_model(model, tokenizer):
+#     model.save_pretrained("lora_model") # Local saving
+#     tokenizer.save_pretrained("lora_model")
 
 
 def save_model():
