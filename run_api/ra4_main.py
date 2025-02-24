@@ -66,7 +66,7 @@ def chatbot():
     while True:
         # Running Ollama Model Using API
         prompt = input("\nUser: ")
-        if prompt == "x":
+        if prompt.lower() == "x":
             print('\nYou chose to exit.\n')
             break
 

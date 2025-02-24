@@ -1,4 +1,4 @@
-from f3_finetuning import finetuning, inference
+from f3_finetuning import finetuning  #, inference
 from f4_saveModel import save_model
 from abort_process import aborting_process
 

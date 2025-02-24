@@ -43,10 +43,14 @@ def run_ollama_model(es, ollama_model, prompt, index_name):
         url = "http://localhost:11434/api/chat"
 
         response = requests.post(url, json=data)
+        if response.status_code != 200:
+            print(f"\nAn error occurred. Status code: {response.status_code}\n")
+            aborting_process()
+
         response_json = json.loads(response.text)
 
-        ai_reply = response_json["message"]["content"]
-        return ai_reply
+        # ai_reply = response_json["message"]["content"]
+        return response_json["message"]["content"]
     except Exception as e:
         print(f"\nError while running ollama api: {e}")
         return None
