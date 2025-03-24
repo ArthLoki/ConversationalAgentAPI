@@ -2,9 +2,11 @@
 
 <h2 tabindex="-1" class="heading-element" dir="auto">Introduction</h2>
 
-SOMETHING
+<p>
+The aim of this project is to create a callable API of a custom conversational agent using LLM, Ollama and ElasticSearch. In future updates, I pretend to implement a multi-agent automation using CrewAi or other automation framework.
+</p>
 
-<h2 tabindex="-1" class="heading-element" dir="auto">Set-up</h2>
+<h2 tabindex="-1" class="heading-element" dir="auto">Setup</h2>
 
 <h3 tabindex="-1" class="heading-element" dir="auto">1. Install Python3</h3>
 
