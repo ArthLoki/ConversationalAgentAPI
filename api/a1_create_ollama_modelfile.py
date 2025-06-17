@@ -1,7 +1,7 @@
 import os
 import subprocess
 import time
-from configs import model_path, modelfile_path, root_path
+from configs import model_path, modelfile_path
 from abort_process import aborting_process
 
 
@@ -15,7 +15,7 @@ def load_ollama():
         return False
 
 
-def write_on_modelfile(ollama_modelname: str, modelname: str, modelfile_name: str, system_content: str):
+def write_on_modelfile(modelname: str, modelfile_name: str, system_content: str):
     try:
         arq = open(os.path.join(modelfile_path, modelfile_name), "w")
         arq.write(
@@ -49,10 +49,10 @@ def write_on_modelfile(ollama_modelname: str, modelname: str, modelfile_name: st
         return False
 
 
-def create_modelfile(ollama_modelname: str, modelfile_name: str, modelname: str, system_content: str):
+def create_modelfile(modelname: str, modelfile_name: str, system_content: str):
 
     try:
-        resWriting = write_on_modelfile(ollama_modelname, modelname, modelfile_name, system_content)
+        resWriting = write_on_modelfile(modelname, modelfile_name, system_content)
         if not resWriting:
             if os.path.exists(os.path.join(modelfile_path, modelfile_name)):
                 subprocess.Popen(["rm", os.path.join(modelfile_path, modelfile_name)])
