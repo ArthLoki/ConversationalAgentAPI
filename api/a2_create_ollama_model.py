@@ -5,10 +5,10 @@ from a1_create_ollama_modelfile import load_ollama, create_modelfile
 from abort_process import aborting_process
 
 
-def create_ollama_model(model_image: str, modelfile_name: str, modelname: str, system_content: str):
+def create_ollama_model(model_image: str, modelname: str, modelfile_name: str, system_content: str):
     try:
         load_ollama()
-        resCreateModelfile = create_modelfile(model_image, modelfile_name, modelname, system_content)
+        resCreateModelfile = create_modelfile(modelname, modelfile_name, system_content)
         if not resCreateModelfile:
             aborting_process()
             exit(1)
