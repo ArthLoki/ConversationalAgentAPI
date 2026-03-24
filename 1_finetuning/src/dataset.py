@@ -1,8 +1,8 @@
 from datasets import load_dataset
-import json
+# import json
 
-from f1_getModel import getBaseModelAndTokenizer
-from configs import static_path
+from src.model import getBaseModelAndTokenizer
+from src.configs import static_path
 
 _, tokenizer = getBaseModelAndTokenizer()
 EOS_TOKEN = tokenizer.eos_token # Must add EOS_TOKEN

@@ -1,7 +1,7 @@
 import requests
 import json
-from ra3_create_elastic_index import get_previous_messages_from_index_data
-from abort_process import aborting_process
+from src.elastic import get_previous_messages_from_index_data
+from src.abort_process import aborting_process
 
 def list_models():
     return {'01': {"model": "galybel", "character": "Galybel"}, '02': {"model": "idris", "character": "Idris Dawnlight"}}

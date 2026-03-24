@@ -1,7 +1,6 @@
-from ra3_create_elastic_index import create_index_elastic, add_index_elastic
-from abort_process import aborting_process
-from ra2_run_ollama_api import run_ollama_model, chose_model
-from ra1_connect_elastic import connectElastic
+from src.elastic import connectElastic, create_index_elastic, add_index_elastic
+from src.abort_process import aborting_process
+from src.ollamaAPI import run_ollama_model, chose_model
 
 es = connectElastic()
 

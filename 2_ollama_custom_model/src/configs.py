@@ -17,7 +17,7 @@ current_directory = os.path.dirname(current_path)
 
 
 # Set path variables
-static_path = f"{root_path}/finetuning/static"
+static_path = f"{root_path}/1_finetuning/static"
 model_path = f"{root_path}/models"
 modelfile_path = f"{root_path}/modelfiles"
 

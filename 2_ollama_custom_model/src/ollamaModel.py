@@ -1,8 +1,8 @@
 import os
 import subprocess
-from configs import modelfile_path
-from a1_create_ollama_modelfile import load_ollama, create_modelfile
-from abort_process import aborting_process
+from src.configs import modelfile_path
+from src.modelfile import load_ollama, create_modelfile
+from src.abort_process import aborting_process
 
 
 def create_ollama_model(model_image: str, modelname: str, modelfile_name: str, system_content: str):

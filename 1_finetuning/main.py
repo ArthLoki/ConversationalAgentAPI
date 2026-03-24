@@ -1,6 +1,6 @@
-from f3_finetuning import finetuning  #, inference
-from f4_saveModel import save_model
-from abort_process import aborting_process
+from src.finetuning import *
+from src.model import *
+from src.abort_process import *
 
 
 def main():
