@@ -1,8 +1,8 @@
 import json
 import subprocess
-from configs import gguf_models
-from a2_create_ollama_model import create_ollama_model
-from abort_process import aborting_process
+from src.configs import gguf_models
+from src.ollamaModel import create_ollama_model
+from src.abort_process import aborting_process
 
 def runNewModel(model_image: str, content: str):
     try:

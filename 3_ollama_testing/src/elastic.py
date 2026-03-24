@@ -1,10 +1,37 @@
+from elasticsearch import Elasticsearch
+from src.configs import ELASTIC_API_ENDPOINT, ELASTIC_API_KEY, ELASTIC_PASSWORD, ELASTIC_USERNAME, mappings
+from src.abort_process import aborting_process
+
 import json
 import uuid
 import datetime
 import requests
-from configs import ELASTIC_API_ENDPOINT, ELASTIC_PASSWORD, ELASTIC_USERNAME, mappings
-from abort_process import aborting_process
 
+
+'''
+Connect Elastic
+'''
+def connectElastic():
+    try:
+        es = Elasticsearch(
+            ELASTIC_API_ENDPOINT,
+            api_key=ELASTIC_API_KEY
+        )
+
+        if es.ping():
+            print("Connected to Elasticsearch")
+        else:
+            raise ConnectionError("Could not connect to Elasticsearch")
+
+        return es
+    except ConnectionError as e:
+        print(f"Connection Error: {e}\n")
+        aborting_process()
+
+
+'''
+Create Index
+'''
 def format_doc(index_name, character_name, conversation_id, question, answer, metadata=None):
     return {
         "index_name": index_name,

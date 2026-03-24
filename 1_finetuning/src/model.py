@@ -1,5 +1,5 @@
 from unsloth import FastLanguageModel
-import torch
+# import torch
 
 max_seq_length = 2048 # Choose any! We auto support RoPE Scaling internally!
 dtype = None # None for auto detection. Float16 for Tesla T4, V100, Bfloat16 for Ampere+
@@ -47,3 +47,19 @@ def getBaseModelAndTokenizer():
     )
 
     return (model, tokenizer)
+
+
+def save_model():
+    try:
+        model, tokenizer = getBaseModelAndTokenizer()
+        # save_lora_model(model, tokenizer)
+        model.save_pretrained_gguf("model", tokenizer,)
+        return True
+    except Exception as err:
+        print(f"Error while saving model: {err}")
+        return False
+
+
+# def save_lora_model(model, tokenizer):
+#     model.save_pretrained("lora_model") # Local saving
+#     tokenizer.save_pretrained("lora_model")

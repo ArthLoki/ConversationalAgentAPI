@@ -1,12 +1,10 @@
+from unsloth import is_bfloat16_supported  #, FastLanguageModel
 from trl import SFTTrainer
 from transformers import TrainingArguments  #, TextStreamer
-from unsloth import is_bfloat16_supported  #, FastLanguageModel
-import torch
+# import torch
 
-
-
-from f1_getModel import getBaseModelAndTokenizer, getMaxSeqLength
-from f2_getDataset import loadCustomizedDataset, getPromptFormat
+from src.model import getBaseModelAndTokenizer, getMaxSeqLength
+from src.dataset import loadCustomizedDataset, getPromptFormat
 
 global max_seq_length, prompt
 max_seq_length = getMaxSeqLength()
