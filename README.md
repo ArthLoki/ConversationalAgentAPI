@@ -83,4 +83,4 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 
 
 <h2 tabindex="-1" class="heading-element" dir="auto">Flowchart</h2>
-![Original Implementation Flowchart](images/tcc_original_flowchart.svg)
+![Original Implementation Flowchart](images/tcc_original_flowchart.png)
