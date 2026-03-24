@@ -9,3 +9,5 @@ models
 __pycache__
 *.pyc
 elastic-start-local
+unsloth_compiled_cache
+model_gguf

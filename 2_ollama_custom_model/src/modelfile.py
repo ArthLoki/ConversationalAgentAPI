@@ -1,8 +1,8 @@
 import os
 import subprocess
 import time
-from configs import model_path, modelfile_path
-from abort_process import aborting_process
+from src.configs import model_path, modelfile_path
+from src.abort_process import aborting_process
 
 
 def load_ollama():
