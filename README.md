@@ -1,4 +1,4 @@
-<h1 align="center"> Conversational Agente API </h1>
+<h1 align="center"> Conversational Agent API </h1>
 
 <h2 tabindex="-1" class="heading-element" dir="auto">Introduction</h2>
 
@@ -12,7 +12,7 @@ The aim of this project is to create a callable API of a custom conversational a
 
 <h3 tabindex="-1" class="heading-element" dir="auto">2. Create a Virtual Environment</h3>
 
-<p>Before installing the dependencies, I suggest you to create a python virtual environment in WSL (I'm using Ubuntu) for each program - finetuning, api and run_api.</p>
+<p>Before installing the dependencies, I suggest you to create a python virtual environment in WSL (I'm using Ubuntu) for each program - <strong>1_finetuning, 2_ollama_custom_model and 3_ollama_testing</strong>.</p>
 
 <p>
 <strong>Step 1: </strong>Run the command for the python version you're using:
@@ -44,7 +44,7 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 
 <h3 tabindex="-1" class="heading-element" dir="auto">1. Building Finetuning Dataset</h3>
 
-<p>The dataset must be saved as <em>filename.json</em> in <em>finetuning/static</em> and its content/dialog MUST have the following format:</p>
+<p>The dataset must be saved as <strong><em>filename.json</em></strong> in <strong><em>1_finetuning/static</em></strong> and its content/dialog MUST have the following format:</p>
 <code>[
     {
         "instruction": "Description of the character",
@@ -57,25 +57,30 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 
 <h3 tabindex="-1" class="heading-element" dir="auto">2. Run <em>Finetuning</em></h3>
 
-<p>Use the <code>cd</code> command to reach the directory <em>finetuning</em> which contains the files to perform the finetuning, then run the command below:</p>
-<code>python f5_main.py</code>
+<p>Use the <code>cd</code> command to reach the directory <strong><em>1_finetuning</em></strong> which contains the files to perform the finetuning, then run the command below:</p>
+<code>python3 main.py</code>
 
-<h2 tabindex="-1" class="heading-element" dir="auto"> Creating Custom Ollama API</h2>
+<h2 tabindex="-1" class="heading-element" dir="auto"> Creating Ollama Custom Model </h2>
 
 <!-- <h3 tabindex="-1" class="heading-element" dir="auto">1. Create Ollama API</h3> -->
 
-<p>Use the <code>cd</code> command to reach the directory <em>api</em> which contains the files to perform the creation of the Ollama API, then run the command below following the instructions given in execution:</p>
-<code>python a3_main.py</code>
+<p>Use the <code>cd</code> command to reach the directory <strong><em>2_ollama_custom_model</em></strong> which contains the files to perform the creation of an Ollama Custom Model, then run the command below following the instructions given in execution:</p>
+<code>python3 main.py</code>
 <p></p>
 <p>Once the code runs smoothly, run in terminal:</p>
-<code>ollama run chosen_modelname</code>
+<p><code>ollama list</code> - to list all existing local models</p>
+<p><code>ollama run chosen_modelname</code> - to run the chosen model</p>
 
-<h2 tabindex="-1" class="heading-element" dir="auto">Running Custom API</h2>
+<h2 tabindex="-1" class="heading-element" dir="auto">Testing Ollama Custom Model</h2>
 
 <!-- <h3 tabindex="-1" class="heading-element" dir="auto">2. Run Ollama API</h3> -->
-<p>Use the <code>cd</code> command to reach the directory <em>run_api</em> which contains the files to perform the execution of the API, then run the commands below and follow the instructions:</p>
+<p>Use the <code>cd</code> command to reach the directory <strong><em>3_ollama_testing</em></strong> which contains the files to test the custom model, then run the commands below and follow the instructions:</p>
 <code>curl -fsSL https://elastic.co/start-local | sh</code>
 
 <p>Remember to update the environment variables in .env, using the ones given by the command above.<p>
 
-<code>python ra4_main.py</code>
+<code>python3 main.py</code>
+
+
+<h2 tabindex="-1" class="heading-element" dir="auto">Flowchart</h2>
+![Original Flowchart](images/tcc_original_flowchart.svg)
