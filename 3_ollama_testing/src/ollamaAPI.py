@@ -6,8 +6,9 @@ from src.abort_process import aborting_process
 
 def list_models():
     return {
-        "01": {"model": "galybel", "character": "Galybel"},
-        "02": {"model": "idris", "character": "Idris Dawnlight"},
+        "01": {"model": "galybel3060", "character": "Galybel"},
+        "02": {"model": "IdrisDawnlight", "character": "Idris Dawnlight"},
+        "03": {"model": "generalDM", "character": "General DM"},
     }
 
 

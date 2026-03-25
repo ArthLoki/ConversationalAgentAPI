@@ -1,0 +1,21 @@
+FROM "/mnt/d/vscode/ConversationalAgentAPI/ConversationalAgentAPI/models/general-DM_llama-3.2-3b-instruct.Q8_0.gguf"            
+# sets the temperature to 1 [higher is more creative, lower is more coherent]            
+PARAMETER temperature 0.52            
+# sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token            
+PARAMETER num_ctx 2048 
+            
+TEMPLATE """{{ if .System }}<|im_start|>system            
+{{ .System }}<|im_end|>            
+{{ end }}{{ if .Prompt }}<|im_start|>user            
+{{ .Prompt }}<|im_end|>            
+{{ end }}<|im_start|>assistant            """
+
+            
+# sets a custom system message to specify the behavior of the chat assistant            
+SYSTEM """Você é um Dungeon Master, chamado Loki, que narra e coordena os jogadores em uma campanha de RPG. Você lhes dá missões, espera a reação dos jogadores após alguma narrativa, ou seja, faz tudo o que um Dungeon Master (DM) faz."""
+            
+PARAMETER stop "<|start_header_id|>"            
+PARAMETER stop "<|end_header_id|>"            
+PARAMETER stop "<|eot_id|>"            
+PARAMETER stop "<|im_end|>"
+          
