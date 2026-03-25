@@ -1,5 +1,11 @@
 from elasticsearch import Elasticsearch
-from src.configs import ELASTIC_API_ENDPOINT, ELASTIC_API_KEY, ELASTIC_PASSWORD, ELASTIC_USERNAME, mappings
+from src.configs import (
+    ELASTIC_API_ENDPOINT,
+    ELASTIC_API_KEY,
+    ELASTIC_PASSWORD,
+    ELASTIC_USERNAME,
+    mappings,
+)
 from src.abort_process import aborting_process
 
 import json
@@ -7,16 +13,14 @@ import uuid
 import datetime
 import requests
 
-
-'''
+"""
 Connect Elastic
-'''
+"""
+
+
 def connectElastic():
     try:
-        es = Elasticsearch(
-            ELASTIC_API_ENDPOINT,
-            api_key=ELASTIC_API_KEY
-        )
+        es = Elasticsearch(ELASTIC_API_ENDPOINT, api_key=ELASTIC_API_KEY)
 
         if es.ping():
             print("Connected to Elasticsearch")
@@ -29,10 +33,14 @@ def connectElastic():
         aborting_process()
 
 
-'''
+"""
 Create Index
-'''
-def format_doc(index_name, character_name, conversation_id, question, answer, metadata=None):
+"""
+
+
+def format_doc(
+    index_name, character_name, conversation_id, question, answer, metadata=None
+):
     return {
         "index_name": index_name,
         "character": character_name,
@@ -41,11 +49,13 @@ def format_doc(index_name, character_name, conversation_id, question, answer, me
         "timestamp": datetime.datetime.now(),
         "input": question,
         "output": answer,
-        "metadata": metadata or {}
+        "metadata": metadata or {},
     }
 
 
-def create_index_elastic(es, index_name, character_name, question, answer, metadata=None):
+def create_index_elastic(
+    es, index_name, character_name, question, answer, metadata=None
+):
     es.indices.create(index=index_name, body=mappings)
     conversation_id = str(uuid.uuid4())
     doc = format_doc(index_name, character_name, conversation_id, question, answer)
@@ -53,7 +63,7 @@ def create_index_elastic(es, index_name, character_name, question, answer, metad
         es.index(index=index_name, document=doc)  # Use a dedicated index name
         print(f"Indexed conversation with ID: {conversation_id}\n")
         return conversation_id
-    except Exception as e: # Catch and print exceptions for debugging
+    except Exception as e:  # Catch and print exceptions for debugging
         print(f"Error indexing document: {e}\n")
         return None
 
@@ -65,10 +75,16 @@ def add_index_elastic(es, index_name, character_name, query, prompt, answer):
 
         resSearch = es.search(index=index_name, query={"match": query})
 
-        conversation_id = resSearch["hits"]["hits"][0]["_source"]["conversation_id"] if len(resSearch["hits"]["hits"]) > 0 else str(uuid.uuid4())
+        conversation_id = (
+            resSearch["hits"]["hits"][0]["_source"]["conversation_id"]
+            if len(resSearch["hits"]["hits"]) > 0
+            else str(uuid.uuid4())
+        )
         # this id is static in the same conversation
 
-        new_content = format_doc(index_name, character_name, conversation_id, prompt, answer)
+        new_content = format_doc(
+            index_name, character_name, conversation_id, prompt, answer
+        )
 
         resAdd = es.index(index=index_name, document=new_content)
 
@@ -81,10 +97,10 @@ def add_index_elastic(es, index_name, character_name, query, prompt, answer):
 def get_index_data(index_name):
     try:
         url = f"{ELASTIC_API_ENDPOINT}/{index_name}/_search"
-        auth = (ELASTIC_USERNAME, ELASTIC_PASSWORD) # Tuple with username and password
-        headers = {'Content-Type': 'application/json'}
+        auth = (ELASTIC_USERNAME, ELASTIC_PASSWORD)  # Tuple with username and password
+        headers = {"Content-Type": "application/json"}
 
-        response =  requests.get(url, auth=auth, headers=headers)
+        response = requests.get(url, auth=auth, headers=headers)
         response_json = json.loads(response.text)["hits"]["hits"]
 
         return response_json
@@ -106,6 +122,9 @@ def get_previous_messages_from_index_data(es, index_name):
     previous_messages = []
     for data in list_index_data:
         dictUserMessages = {"role": "user", "content": data["_source"]["input"]}
-        dictAssistantMessages = {"role": "assistant", "content": data["_source"]["output"]}
+        dictAssistantMessages = {
+            "role": "assistant",
+            "content": data["_source"]["output"],
+        }
         previous_messages.extend([dictUserMessages, dictAssistantMessages])
     return previous_messages

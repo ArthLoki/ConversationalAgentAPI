@@ -13,12 +13,12 @@ mappings = {
         "properties": {
             "index_name": {"type": "text"},
             "character": {"type": "text"},
-            "conversation_id": { "type": "keyword" },
-            "pair_id": { "type": "keyword" },
-            "timestamp": { "type": "date" },
-            "input": { "type": "text" },
-            "output": { "type": "text" },
-            "metadata": { "type": "object" }
+            "conversation_id": {"type": "keyword"},
+            "pair_id": {"type": "keyword"},
+            "timestamp": {"type": "date"},
+            "input": {"type": "text"},
+            "output": {"type": "text"},
+            "metadata": {"type": "object"},
         }
     }
 }

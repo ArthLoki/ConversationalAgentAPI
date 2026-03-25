@@ -3,43 +3,46 @@ import json
 from src.elastic import get_previous_messages_from_index_data
 from src.abort_process import aborting_process
 
+
 def list_models():
-    return {'01': {"model": "galybel", "character": "Galybel"}, '02': {"model": "idris", "character": "Idris Dawnlight"}}
+    return {
+        "01": {"model": "galybel", "character": "Galybel"},
+        "02": {"model": "idris", "character": "Idris Dawnlight"},
+    }
 
 
 def chose_model():
-        try:
-            models_available = list_models()
+    try:
+        models_available = list_models()
 
-            print(f"\n=====================\n")
-            for key, value in models_available.items():
-                print(f"{key}: Model: {value.get('model')}\n    Character: {value.get('character')}")
-            print(f"\n=====================\n")
+        print(f"\n=====================\n")
+        for key, value in models_available.items():
+            print(
+                f"{key}: Model: {value.get('model')}\n    Character: {value.get('character')}"
+            )
+        print(f"\n=====================\n")
 
-            model_key = input("Choose a model to run (only the numeric value): ")
+        model_key = input("Choose a model to run (only the numeric value): ")
 
-            values = models_available.get(str(model_key))
-            if values is None:
-                print("\nThe selected model key doesn't exist.\n")
-                aborting_process()
+        values = models_available.get(str(model_key))
+        if values is None:
+            print("\nThe selected model key doesn't exist.\n")
+            aborting_process()
 
-            model_name = values.get("model")
-            character_name = values.get("character")
+        model_name = values.get("model")
+        character_name = values.get("character")
 
-            return model_name, character_name
-        except Exception as e:
-            print(f"Error while choosing the model: {e}\n")
-            exit(0)
+        return model_name, character_name
+    except Exception as e:
+        print(f"Error while choosing the model: {e}\n")
+        exit(0)
+
 
 def run_ollama_model(es, ollama_model, prompt, index_name):
     try:
         messages = get_previous_messages_from_index_data(es, index_name)
         messages.append({"role": "user", "content": prompt})
-        data = {
-                "model": ollama_model, 
-                "messages": messages,
-                "stream": False
-        }
+        data = {"model": ollama_model, "messages": messages, "stream": False}
         url = "http://localhost:11434/api/chat"
 
         response = requests.post(url, json=data)

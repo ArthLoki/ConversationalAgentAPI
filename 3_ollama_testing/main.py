@@ -6,13 +6,14 @@ import json
 
 es = connectElastic()
 
+
 def mainOllamaAPI(index_name):
     try:
         model, character_name = chose_model()
 
         prompt = input("\nEnter a prompt: ")
         if prompt == "x":
-            print('\nYou chose to exit.\n')
+            print("\nYou chose to exit.\n")
             exit(0)
 
         resResponse = run_ollama_model(es, model, prompt, index_name)
@@ -33,12 +34,16 @@ def mainElasticIndex(index_name, character_name, prompt, resResponse):
             es.indices.refresh(index=index_name)
             print("Index created successfully!\n")
         else:
-            query = {"index_name": index_name} # "index_name": index_name, "character": character_name
+            query = {
+                "index_name": index_name
+            }  # "index_name": index_name, "character": character_name
             resSearch = es.search(index=index_name, query={"match": query})
             if not resSearch:
                 aborting_process()
 
-            resUpdate = add_index_elastic(es, index_name, character_name, query, prompt, resResponse)
+            resUpdate = add_index_elastic(
+                es, index_name, character_name, query, prompt, resResponse
+            )
             es.indices.refresh(index=index_name)
             if not resUpdate:
                 aborting_process()
@@ -82,7 +87,7 @@ def chatbot():
         else:
             prompt = input("\nUser: ")
         if prompt.lower() == "x":
-            print('\nYou chose to exit.\n')
+            print("\nYou chose to exit.\n")
             break
 
         resResponse = run_ollama_model(es, model, prompt, index_name)
@@ -100,12 +105,16 @@ def chatbot():
             create_index_elastic(es, index_name, character_name, prompt, resResponse)
             es.indices.refresh(index=index_name)
         else:
-            query = {"index_name": index_name} # "index_name": index_name, "character": character_name
+            query = {
+                "index_name": index_name
+            }  # "index_name": index_name, "character": character_name
             resSearch = es.search(index=index_name, query={"match": query})
             if not resSearch:
                 aborting_process()
 
-            resUpdate = add_index_elastic(es, index_name, character_name, query, prompt, resResponse)
+            resUpdate = add_index_elastic(
+                es, index_name, character_name, query, prompt, resResponse
+            )
             es.indices.refresh(index=index_name)
             if not resUpdate:
                 aborting_process()
