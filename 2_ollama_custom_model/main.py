@@ -30,11 +30,15 @@ def main():
     print(f"\n=====================\n")
     character_index = int(input("\nChoose a character to create a modelfile for (only the numeric value): "))
 
-    system_content = all_characters_name[character_index-1]
+    chosenCharacter = all_characters_name[character_index-1]
+    systemContent = jsonSystemContent.get(chosenCharacter)
+
+    # print(f"Chosen Character: {chosenCharacter}")
+    # print(f"System Content: {systemContent}")
 
     print("\n\n>>> Step 2: Create an Ollama model")
     model_image = input("\nChoose a name for your ollama model: ")
-    resOllamaModel = create_ollama_model(model_image.lower(), modelname, modelfile_name, system_content)
+    resOllamaModel = create_ollama_model(model_image.lower(), modelname, modelfile_name, systemContent)
     if not resOllamaModel:
         print("\nAn error occured. Try again later.")
     exit(1)
