@@ -8,7 +8,7 @@ from src.abort_process import aborting_process
 def load_ollama():
     try:
         subprocess.Popen(["ollama", "serve"])
-        time.sleep(3) # Wait for a few seconds for Ollama to load!
+        time.sleep(3)  # Wait for a few seconds for Ollama to load!
         return True
     except Exception as err:
         print(f"Error while loading ollama: {err}")
@@ -19,11 +19,12 @@ def write_on_modelfile(modelname: str, modelfile_name: str, system_content: str)
     try:
         arq = open(os.path.join(modelfile_path, modelfile_name), "w")
         arq.write(
-            f'''FROM "{os.path.join(model_path, modelname)}"\
+            f"""FROM "{os.path.join(model_path, modelname)}"\
             \n# sets the temperature to 1 [higher is more creative, lower is more coherent]\
             \nPARAMETER temperature 0.52\
             \n# sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token\
-            \nPARAMETER num_ctx 2048 ''' + '''\
+            \nPARAMETER num_ctx 2048 """
+            + '''\
 
             \nTEMPLATE """{{ if .System }}<|im_start|>system\
             \n{{ .System }}<|im_end|>\
@@ -33,7 +34,8 @@ def write_on_modelfile(modelname: str, modelfile_name: str, system_content: str)
             """
 
             \n# sets a custom system message to specify the behavior of the chat assistant\
-            \nSYSTEM ''' + f'''"""{system_content}"""\
+            \nSYSTEM '''
+            + f'''"""{system_content}"""\
 
             \nPARAMETER stop "<|start_header_id|>"\
             \nPARAMETER stop "<|end_header_id|>"\
