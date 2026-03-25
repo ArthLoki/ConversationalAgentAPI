@@ -2,6 +2,8 @@ from src.elastic import connectElastic, create_index_elastic, add_index_elastic
 from src.abort_process import aborting_process
 from src.ollamaAPI import run_ollama_model, chose_model
 
+import json
+
 es = connectElastic()
 
 def mainOllamaAPI(index_name):
@@ -57,6 +59,16 @@ def main():
     mainElasticIndex(index_name, character_name, prompt, resResponse)
 
 
+def getCharacterChatCustomization(characterName):
+    # https://www.dio.me/articles/colocando-cores-no-seu-programa-em-python
+    characterStyles = json.load(open("utils/characterStyles.json"))
+
+    charColour = characterStyles.get(characterName)
+    if not charColour:
+        return ""
+    return f"\033[1;3;{charColour}m", "\033[0m"
+
+
 def chatbot():
     index_name = input("\nEnter an index name to identify conversation: ").lower()
     model, character_name = chose_model()
@@ -64,7 +76,11 @@ def chatbot():
 
     while True:
         # Running Ollama Model Using API
-        prompt = input("\nUser: ")
+        userCustom = getCharacterChatCustomization("User")
+        if userCustom:
+            prompt = input(f"\n{userCustom[0]}User:{userCustom[1]} ")
+        else:
+            prompt = input("\nUser: ")
         if prompt.lower() == "x":
             print('\nYou chose to exit.\n')
             break
@@ -72,7 +88,12 @@ def chatbot():
         resResponse = run_ollama_model(es, model, prompt, index_name)
         if resResponse is None:
             aborting_process()
-        print(f"\n{character_name}: {resResponse}")
+
+        charCustom = getCharacterChatCustomization(character_name)
+        if charCustom:
+            print(f"\n{charCustom[0]}{character_name}:{charCustom[1]} {resResponse}")
+        else:
+            print(f"\n{character_name}: {resResponse}")
 
         # ElasticSearch to create historic messages of each conversation
         if not es.indices.exists(index=index_name):
