@@ -13,7 +13,6 @@ prompt = getPromptFormat()
 
 
 def getTrainer(model, tokenizer, dataset):
-
     try:
         trainer = SFTTrainer(
             model=model,

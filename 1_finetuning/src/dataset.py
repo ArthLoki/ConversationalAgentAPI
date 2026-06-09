@@ -14,7 +14,6 @@ def getPromptFormat():
 
 
 def formatting_prompts_func(jsonFilename):
-
     prompt = getPromptFormat()
 
     instructions = jsonFilename["input"]

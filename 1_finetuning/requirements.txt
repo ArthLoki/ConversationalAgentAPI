@@ -3,6 +3,8 @@
 # Decaprecated: pip3 install torch==2.5.1 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 # New: pip3 install torch torchvision
 
+# If necessary: pip install --upgrade --force-reinstall --no-cache-dir --no-deps unsloth unsloth_zoo
+
 unsloth @ git+https://github.com/unslothai/unsloth.git
 trl
 peft
