@@ -28,11 +28,12 @@ def getBaseModelAndTokenizer():
     # ] # More models at https://huggingface.co/unsloth
 
     model, tokenizer = FastLanguageModel.from_pretrained(
-        model_name="unsloth/Llama-3.2-3B-Instruct",
+        model_name="unsloth/Llama-3.2-3B-Instruct",  # "unsloth/Ministral-3-3B-Instruct-2512-GGUF", # "unsloth/Llama-3.2-3B-Instruct",
         max_seq_length=max_seq_length,
         dtype=dtype,
         load_in_4bit=load_in_4bit,
         # token = "hf_...", # use one if using gated models like meta-llama/Llama-2-7b-hf
+        # chat_template = "mistral"
     )
 
     model = FastLanguageModel.get_peft_model(

@@ -110,7 +110,6 @@ def get_index_data(index_name):
 
 
 def get_previous_messages_from_index_data(es, index_name):
-
     if not es.indices.exists(index=index_name):
         es.indices.create(index=index_name, body=mappings)
         es.indices.refresh(index=index_name)

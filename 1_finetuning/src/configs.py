@@ -32,7 +32,7 @@ if not os.path.exists(model_path):
 
 
 # Set model and dataset variables
-model_id = "meta-llama/Meta-Llama-3.2-3B-Instruct"
+model_id = "meta-llama/Meta-Llama-3.2-3B-Instruct"  # "unsloth/Ministral-3-3B-Instruct-2512-GGUF" # "meta-llama/Meta-Llama-3.2-3B-Instruct"
 
 gguf_models = [
     gguf_model

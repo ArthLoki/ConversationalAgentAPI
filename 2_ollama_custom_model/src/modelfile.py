@@ -52,7 +52,6 @@ def write_on_modelfile(modelname: str, modelfile_name: str, system_content: str)
 
 
 def create_modelfile(modelname: str, modelfile_name: str, system_content: str):
-
     try:
         resWriting = write_on_modelfile(modelname, modelfile_name, system_content)
         if not resWriting:
