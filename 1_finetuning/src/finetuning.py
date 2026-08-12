@@ -85,5 +85,5 @@ def finetuning(datasetJSONFilename):
     dataset = loadCustomizedDataset(datasetJSONFilename)
     resTrain = train(model, tokenizer, dataset)
     if not resTrain:
-        return False
-    return True
+        return None, None
+    return model, tokenizer

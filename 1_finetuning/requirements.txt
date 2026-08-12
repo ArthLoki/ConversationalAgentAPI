@@ -4,6 +4,7 @@
 # New: pip3 install torch torchvision
 
 # If necessary: pip install --upgrade --force-reinstall --no-cache-dir --no-deps unsloth unsloth_zoo
+# If necessary: pip install --upgrade unsloth unsloth_zoo gguf; rm -rf ~/.unsloth/llama.cpp
 
 unsloth @ git+https://github.com/unslothai/unsloth.git
 trl

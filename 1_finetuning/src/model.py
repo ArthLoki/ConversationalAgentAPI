@@ -33,7 +33,7 @@ def getBaseModelAndTokenizer():
         dtype=dtype,
         load_in_4bit=load_in_4bit,
         # token = "hf_...", # use one if using gated models like meta-llama/Llama-2-7b-hf
-        # chat_template = "mistral"
+        # chat_template = "llama-3.1"  # "mistral"
     )
 
     model = FastLanguageModel.get_peft_model(
@@ -61,20 +61,39 @@ def getBaseModelAndTokenizer():
     return (model, tokenizer)
 
 
-def save_model():
+def save_lora_model(model, tokenizer, folder_name="lora_model"):
+    """Salva os adaptadores LoRA (~50MB) - Leve e garantido."""
     try:
-        model, tokenizer = getBaseModelAndTokenizer()
-        # save_lora_model(model, tokenizer)
-        model.save_pretrained_gguf(
-            "model",
-            tokenizer,
-        )
+        model.save_pretrained(folder_name)
+        tokenizer.save_pretrained(folder_name)
+        print(f"LoRA model successfully saved to '{folder_name}'")
         return True
     except Exception as err:
-        print(f"Error while saving model: {err}")
+        print(f"Error while saving LoRA model: {err}")
         return False
 
 
-# def save_lora_model(model, tokenizer):
-#     model.save_pretrained("lora_model") # Local saving
-#     tokenizer.save_pretrained("lora_model")
+def save_gguf_model(model, tokenizer, folder_name="model", quantization="q4_k_m"):
+    """Tenta converter e salvar diretamente em GGUF."""
+    try:
+        model.save_pretrained_gguf(
+            folder_name,
+            tokenizer,
+            quantization_method=quantization,
+        )
+        print(f"GGUF model successfully saved to '{folder_name}'")
+        return True
+    except Exception as err:
+        print(f"Error while saving GGUF model: {err}")
+        return False
+
+
+def save_model(model, tokenizer):
+    """Recebe o modelo JÁ TREINADO e o tokenizer para salvar."""
+    # 1. Salva sempre o LoRA como backup garantido
+    lora_saved = save_lora_model(model, tokenizer)
+
+    # 2. Tenta o salvamento GGUF
+    gguf_saved = save_gguf_model(model, tokenizer)
+
+    return lora_saved or gguf_saved
