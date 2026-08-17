@@ -1,4 +1,5 @@
 import os
+import textwrap
 import subprocess
 import time
 from src.configs import model_path, modelfile_path
@@ -15,36 +16,39 @@ def load_ollama():
         return False
 
 
-def write_on_modelfile(modelname: str, modelfile_name: str, system_content: str):
+def write_on_modelfile(
+    modelname: str, modelfile_name: str, system_content: str
+):
+    full_model_path = os.path.join(model_path, modelname)
+    full_modelfile_path = os.path.join(modelfile_path, modelfile_name)
+
+    # Usa textwrap.dedent para ignorar a indentação do código Python
+    content = textwrap.dedent(f'''\
+        FROM "{full_model_path}"
+
+        # PARAMETERS
+        PARAMETER temperature 0.52
+        PARAMETER num_ctx 2048
+
+        # STOP TOKENS (ChatML)
+        PARAMETER stop "<|im_end|>"
+        PARAMETER stop "<|im_start|>"
+
+        # TEMPLATE (Com {{ .Response }})
+        TEMPLATE """{{{{ if .System }}}}<|im_start|>system
+        {{{{ .System }}}}<|im_end|>
+        {{{{ end }}}}{{{{ if .Prompt }}}}<|im_start|>user
+        {{{{ .Prompt }}}}<|im_end|>
+        {{{{ end }}}}<|im_start|>assistant
+        {{{{ .Response }}}}<|im_end|>"""
+
+        # SYSTEM
+        SYSTEM """{system_content}"""
+    ''')
+
     try:
-        arq = open(os.path.join(modelfile_path, modelfile_name), "w")
-        arq.write(
-            f"""FROM "{os.path.join(model_path, modelname)}"\
-            \n# sets the temperature to 1 [higher is more creative, lower is more coherent]\
-            \nPARAMETER temperature 0.52\
-            \n# sets the context window size to 4096, this controls how many tokens the LLM can use as context to generate the next token\
-            \nPARAMETER num_ctx 2048 """
-            + '''\
-
-            \nTEMPLATE """{{ if .System }}<|im_start|>system\
-            \n{{ .System }}<|im_end|>\
-            \n{{ end }}{{ if .Prompt }}<|im_start|>user\
-            \n{{ .Prompt }}<|im_end|>\
-            \n{{ end }}<|im_start|>assistant\
-            """
-
-            \n# sets a custom system message to specify the behavior of the chat assistant\
-            \nSYSTEM '''
-            + f'''"""{system_content}"""\
-
-            \nPARAMETER stop "<|start_header_id|>"\
-            \nPARAMETER stop "<|end_header_id|>"\
-            \nPARAMETER stop "<|eot_id|>"\
-            \nPARAMETER stop "<|im_end|>"\
-
-            '''
-        )
-        arq.close()
+        with open(full_modelfile_path, "w", encoding="utf-8") as arq:
+            arq.write(content)
         return True
     except Exception as err:
         print(f"Error while writing on modelfile: {err}")
@@ -53,6 +57,7 @@ def write_on_modelfile(modelname: str, modelfile_name: str, system_content: str)
 
 def create_modelfile(modelname: str, modelfile_name: str, system_content: str):
     try:
+        modelfile_name = f"{modelfile_name}.modelfile"
         resWriting = write_on_modelfile(modelname, modelfile_name, system_content)
         if not resWriting:
             if os.path.exists(os.path.join(modelfile_path, modelfile_name)):
