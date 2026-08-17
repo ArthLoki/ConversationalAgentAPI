@@ -12,6 +12,3 @@ elastic-start-local
 unsloth_compiled_cache
 model_gguf
 *teste*.*
-.env
-.env.*
-!.env.example
