@@ -44,12 +44,23 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 
 <h3 tabindex="-1" class="heading-element" dir="auto">1. Building Finetuning Dataset</h3>
 
-<p>The dataset must be saved as <strong><em>filename.json</em></strong> in <strong><em>1_finetuning/static</em></strong> and its content/dialog MUST have the following format:</p>
+<p>The dataset must be saved as <strong><em>filename.json</em></strong> in <strong><em>1_finetuning/static/chatml/</em></strong> and its content/dialog MUST have the following format:</p>
 <code>[
     {
-        "instruction": "Description of the character",
-        "input": "User/player input",
-        "output": "How the AI must answer the question"
+        "messages": [
+            {
+                "role": "system",
+                "content": "Description of the character"
+            },
+            {
+                "role": "user",
+                "content": "User/player input"
+            },
+            {
+                "role": "assistant",
+                "content": "How the AI must answer the question"
+            }
+        ]
     },
     .....
 ]

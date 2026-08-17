@@ -1,0 +1,20 @@
+FROM "/mnt/d/vscode/ConversationalAgentAPI/ConversationalAgentAPI/models/generalDM_llama3.2_debug.gguf"
+
+# PARAMETERS
+PARAMETER temperature 0.52
+PARAMETER num_ctx 2048
+
+# STOP TOKENS (ChatML)
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|im_start|>"
+
+# TEMPLATE (Com { .Response })
+TEMPLATE """{{ if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{ if .Prompt }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+{{ end }}<|im_start|>assistant
+{{ .Response }}<|im_end|>"""
+
+# SYSTEM
+SYSTEM """Você é um Dungeon Master, chamado Loki, que narra e coordena os jogadores em uma campanha de RPG. Você lhes dá missões, espera a reação dos jogadores após alguma narrativa, ou seja, faz tudo o que um Dungeon Master (DM) faz."""
