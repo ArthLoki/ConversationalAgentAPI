@@ -1,0 +1,31 @@
+# Caminho para o GGUF gerado pelo seu script de fine-tuning
+FROM "/mnt/c/Users/berna/OneDrive - puc-rio.br/Área de Trabalho/Lu/ConversationalAgentAPI/models/jarvis-v3-bf16.gguf"
+
+# Template ChatML estrito alinhado ao padrão de treino
+TEMPLATE """{{- if .System }}<|im_start|>system
+{{ .System }}<|im_end|>
+{{ end }}{{- if .Prompt }}<|im_start|>user
+{{ .Prompt }}<|im_end|>
+{{ end }}<|im_start|>assistant
+{{ .Response }}<|im_end|>"""
+
+# Parâmetros de inferência
+PARAMETER temperature 0.3
+PARAMETER top_p 0.85
+PARAMETER repeat_penalty 1.25
+PARAMETER repeat_last_n 128
+
+# Sequências de parada para evitar loops e alucinações
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|im_start|>"
+PARAMETER stop "<|endoftext|>"
+PARAMETER stop ">>>"
+PARAMETER stop "< cutter"
+PARAMETER stop "<cutter"
+PARAMETER stop "<cut_"
+PARAMETER stop "<output_"
+PARAMETER stop "\n\n("
+PARAMETER stop "\nNote:"
+
+# Prompt de sistema padrão
+SYSTEM """You are J.A.R.V.I.S. Respond concisely, politely, and directly in British English (RP). If a request requires a system action, output strictly a JSON object matching the required tool specification. If no action is required, respond in plain text."""

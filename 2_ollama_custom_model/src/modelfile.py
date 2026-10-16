@@ -16,14 +16,13 @@ def load_ollama():
         return False
 
 
-def write_on_modelfile(
-    modelname: str, modelfile_name: str, system_content: str
-):
+def write_on_modelfile(modelname: str, modelfile_name: str, system_content: str):
     full_model_path = os.path.join(model_path, modelname)
     full_modelfile_path = os.path.join(modelfile_path, modelfile_name)
 
     # Usa textwrap.dedent para ignorar a indentação do código Python
-    content = textwrap.dedent(f'''\
+    content = textwrap.dedent(
+        f'''\
         FROM "{full_model_path}"
 
         # PARAMETERS
@@ -44,7 +43,8 @@ def write_on_modelfile(
 
         # SYSTEM
         SYSTEM """{system_content}"""
-    ''')
+    '''
+    )
 
     try:
         with open(full_modelfile_path, "w", encoding="utf-8") as arq:

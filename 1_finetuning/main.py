@@ -6,7 +6,7 @@ from src.abort_process import *
 def main():
     # Dataset
     datasetFilename = input(
-        "\nWrite the name of the dataset without the extension .json ('x' to exit): "
+        "\nWrite the name of the dataset with the extension ('x' to exit): "
     )
     if datasetFilename.lower() == "x":
         aborting_process()

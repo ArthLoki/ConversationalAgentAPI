@@ -70,6 +70,8 @@ Or install dependencies separately. For example: <code>pip install trl peft acce
 
 <p>Use the <code>cd</code> command to reach the directory <strong><em>1_finetuning</em></strong> which contains the files to perform the finetuning, then run the command below:</p>
 <code>python3 main.py</code>
+<code>python3 merge_and_save.py</code>
+<code>python llama.cpp/convert_hf_to_gguf.py "merged_model" --outfile "outputs/modelName.gguf" --outtype bf16</code>
 
 <h2 tabindex="-1" class="heading-element" dir="auto"> Creating Ollama Custom Model </h2>
 
