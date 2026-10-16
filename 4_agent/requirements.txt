@@ -1,0 +1,18 @@
+# --- Ollama Python Client ---
+ollama>=0.4.0
+
+# --- Web & API Integrations ---
+duckduckgo-search>=7.0.0
+requests>=2.31.0
+urllib3>=2.0.0
+
+# --- Environment & Configuration ---
+python-dotenv>=1.0.0
+
+# --- Model Retrieval (Google Drive) ---
+gdown>=5.1.0
+
+# --- System, Testing & Diagnostics ---
+psutil>=5.9.0
+pytest>=8.0.0
+mss>=9.0.0

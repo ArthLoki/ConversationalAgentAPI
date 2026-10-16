@@ -37,7 +37,7 @@ def formatting_prompts_func(jsonFilename, chatTemplate: str = "chatml"):
 def loadCustomizedDataset(datasetJsonFilename):
     dataset = load_dataset(
         "json",
-        data_files=f"{static_path}/chatml/{datasetJsonFilename}.json",
+        data_files=f"{static_path}/chatml/{datasetJsonFilename}",
         split="train",
     )
     dataset = dataset.map(

@@ -17,6 +17,7 @@ unsloth-zoo
 cmake
 torch
 torchvision
+diffusers
 
 # Conditional dependency for xformers based on Torch version:
 # If using torch < 2.4, manually install xformers==0.0.27:
